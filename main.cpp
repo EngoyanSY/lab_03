@@ -37,10 +37,11 @@ find_minmax(const vector<double> numbers, double& min, double&max)
 }
 
 vector<size_t> 
-make_histogram(const vector<double> numbers, size_t bin_count, double min, double max)
+make_histogram(const vector<double> numbers, size_t bin_count)
 {
 	vector<size_t> bins(bin_count,0);
-
+	double min, max;
+	find_minmax(numbers, min, max);
 	double bin_size = (max - min) / bin_count;
 
 	for (size_t i = 0; i < numbers.size(); i++)
@@ -65,6 +66,8 @@ make_histogram(const vector<double> numbers, size_t bin_count, double min, doubl
 	}
 	return bins;
 }
+
+//Модуль SVG
 
 void
 show_histogram_text(const vector<size_t> bins, double min, double max)
@@ -196,12 +199,9 @@ int main()
 	cin >> bin_count;
 
 	//Рассчет гистограммы
-	double max, min;
-	find_minmax(numbers, min, max);
 
-	const auto bins = make_histogram(numbers, bin_count, min, max);
+	const auto bins = make_histogram(numbers, bin_count);
 
 	//Вывод данных
-	/*show_histogram_text(bins, min, max);*/
 	show_histogram_svg(bins);
 }
