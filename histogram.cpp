@@ -6,20 +6,23 @@ using namespace std;
 void
 find_minmax(const vector<double> numbers, double& min, double& max)
 {
-	min = numbers[0];
-	max = numbers[0];
-
-	for (double number : numbers)
+	if (numbers.size() != 0)
 	{
-		if (number < min)
-		{
-			min = number;
-		}
+		min = numbers[0];
+		max = numbers[0];
 
-		else
-			if (number > max)
+		for (double number : numbers)
+		{
+			if (number < min)
 			{
-				max = number;
+				min = number;
 			}
+
+			else
+				if (number > max)
+				{
+					max = number;
+				}
+		}
 	}
 }

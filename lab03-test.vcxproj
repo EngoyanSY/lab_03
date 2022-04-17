@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4395defe-a336-4249-9987-a9be6ff5eb3a}</ProjectGuid>
-    <RootNamespace>pr3</RootNamespace>
+    <ProjectGuid>{5480f494-40e5-400b-9db7-a255a9628267}</ProjectGuid>
+    <RootNamespace>lab03test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="histogram.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="histogram.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="histogram.h" />
+    <ClCompile Include="histogram.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
