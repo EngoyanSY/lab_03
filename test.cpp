@@ -1,6 +1,8 @@
 #include "histogram.h"
 
 #include <cassert>
+#include <vector>
+#include <string>
 
 void
 test_positive()
@@ -53,6 +55,21 @@ test_void()
 	assert(max == 0);
 }
 
+void
+test_size_colors()
+{
+	auto colors = choose_colors(3);
+	assert(colors.size() == 3);
+}
+
+void test_rgb()
+{
+	auto colors = choose_colors(3);
+	assert(colors[0] == "red");
+	assert(colors[1] == "green");
+	assert(colors[2] == "blue");
+}
+
 int
 main() 
 {
@@ -61,4 +78,6 @@ main()
 	test_similar();
 	test_single();
 	test_void();
+	test_size_colors();
+	test_rgb();
 }

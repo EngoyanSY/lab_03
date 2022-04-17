@@ -33,7 +33,7 @@ svg_rect(double x, double y, double width, double height, string stroke = "black
 }
 
 void
-show_histogram_svg(const vector<size_t>& bins)
+show_histogram_svg(const vector<size_t>& bins, const vector<string>& fills)
 {
 	const auto IMAGE_WIDTH = 400;
 	const auto IMAGE_HEIGHT = 300;
@@ -59,6 +59,7 @@ show_histogram_svg(const vector<size_t>& bins)
 	max_bins_width = max_bins_width * BLOCK_WIDTH;
 
 	double top = 0;
+	double fill = 0;
 	for (size_t bin : bins)
 	{
 		double bin_width = BLOCK_WIDTH * bin;
@@ -68,8 +69,9 @@ show_histogram_svg(const vector<size_t>& bins)
 		}
 
 		svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
-		svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "red", "#ffeeee");
+		svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "black", fills[fill]);
 		top += BIN_HEIGHT;
+		fill++;
 	}
 
 	svg_end();

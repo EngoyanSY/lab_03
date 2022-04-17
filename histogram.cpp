@@ -26,3 +26,15 @@ find_minmax(const vector<double> numbers, double& min, double& max)
 		}
 	}
 }
+
+vector<string>
+choose_colors(size_t bin_count)
+{
+	vector<string> colors(bin_count);
+	for (size_t i = 0; i < bin_count; i++)
+	{
+		cerr << "Color [" << i + 1 << "]: ";
+		cin >> colors[i];
+	}
+	return colors;
+}

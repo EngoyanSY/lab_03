@@ -18,4 +18,4 @@ void
 svg_rect(double x, double y, double width, double height, string stroke = "black", string fill = "black");
 
 void
-show_histogram_svg(const vector<size_t>& bins);
+show_histogram_svg(const vector<size_t>& bins, const vector<string>& fills);

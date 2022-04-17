@@ -51,6 +51,7 @@ make_histogram(const vector<double> numbers, size_t bin_count)
 }
 
 
+
 int main()
 {
 	//Ввод данных
@@ -68,13 +69,18 @@ int main()
 	const auto numbers = input_numbers(number_count);
 
 	size_t bin_count;
-	cerr << "Enter bin count: ";
+	cerr << "Enter bin count: \n";
 	cin >> bin_count;
+
+
+	cerr << "Choose fills: \n";
+	auto fills = choose_colors(bin_count);
+	
 
 	//Рассчет гистограммы
 
 	const auto bins = make_histogram(numbers, bin_count);
 
 	//Вывод данных
-	show_histogram_svg(bins);
+	show_histogram_svg(bins, fills);
 }
