@@ -48,11 +48,11 @@ test_single()
 void
 test_void()
 {
-	double min = 0;
-	double max = 0;
+	double min = 5;
+	double max = 10;
 	find_minmax({ }, min, max);
-	assert(min == 0);
-	assert(max == 0);
+	assert(min == 5);
+	assert(max == 10);
 }
 
 void
