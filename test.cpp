@@ -1,8 +1,12 @@
 #include "histogram.h"
 
 #include <cassert>
+#include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
+
+using namespace std;
 
 void
 test_positive()
@@ -31,7 +35,7 @@ test_similar()
 	double max = 0;
 	find_minmax({ 7, 7, 7 }, min, max);
 	assert(max == 7);
-	assert(min == 7);;
+	assert(min == 7);
 }
 
 void
@@ -58,16 +62,25 @@ test_void()
 void
 test_size_colors()
 {
-	auto colors = choose_colors(3);
+	istringstream stream("red green blue");
+	auto colors = choose_colors(3, stream);
 	assert(colors.size() == 3);
 }
 
 void test_rgb()
 {
-	auto colors = choose_colors(3);
+	istringstream stream("red green blue");
+	auto colors = choose_colors(3, stream);
 	assert(colors[0] == "red");
 	assert(colors[1] == "green");
 	assert(colors[2] == "blue");
+}
+
+void test_col()
+{
+	istringstream stream("     ");
+	auto colors = choose_colors(1, stream);
+	assert(colors[0] == "");
 }
 
 int
@@ -80,4 +93,5 @@ main()
 	test_void();
 	test_size_colors();
 	test_rgb();
+	test_col();
 }

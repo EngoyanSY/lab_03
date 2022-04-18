@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -28,13 +30,14 @@ find_minmax(const vector<double> numbers, double& min, double& max)
 }
 
 vector<string>
-choose_colors(size_t bin_count)
+choose_colors(size_t bin_count, istream& stream)
 {
 	vector<string> colors(bin_count);
+
 	for (size_t i = 0; i < bin_count; i++)
 	{
 		cerr << "Color [" << i + 1 << "]: ";
-		cin >> colors[i];
+		stream >> colors[i];
 	}
 	return colors;
 }

@@ -60,7 +60,7 @@ int main()
 	cerr << "Enter number count: ";
 	cin >> number_count;
 
-	if (number_count == 0)
+	if (!number_count)
 	{
 		cout << "Number count = 0";
 		return 0;
@@ -75,7 +75,8 @@ int main()
 
 
 	cerr << "Choose fills: \n";
-	auto fills = choose_colors(bin_count);
+
+	auto fills = choose_colors(bin_count, cin);
 	
 
 	//Рассчет гистограммы
