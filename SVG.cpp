@@ -59,19 +59,17 @@ show_histogram_svg(const vector<size_t>& bins, const vector<string>& fills)
 	max_bins_width = max_bins_width * BLOCK_WIDTH;
 
 	double top = 0;
-	double fill = 0;
-	for (size_t bin : bins)
+	for (size_t i = 0; i < bins.size(); i++)
 	{
-		double bin_width = BLOCK_WIDTH * bin;
+		double bin_width = BLOCK_WIDTH * bins[i];
 		if (max_bins_width >= MAX_BIN_WIDTH)
 		{
 			bin_width = MAX_BIN_WIDTH * (bin_width / max_bins_width) - 1;
 		}
 
-		svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
-		svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "black", fills[fill]);
+		svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bins[i]));
+		svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "black", fills[i]);
 		top += BIN_HEIGHT;
-		fill++;
 	}
 
 	svg_end();
