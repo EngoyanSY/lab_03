@@ -27,7 +27,7 @@ make_histogram(const vector<double> numbers, size_t bin_count)
 	find_minmax(numbers, min, max);
 	double bin_size = (max - min) / bin_count;
 
-	for (size_t i = 0; i < numbers.size(); i++)
+	for (double number : numbers)
 	{
 		bool found = false;
 		for (size_t j = 0; j < (bin_count - 1) && !found; j++)
@@ -35,7 +35,7 @@ make_histogram(const vector<double> numbers, size_t bin_count)
 			auto lo = min + bin_size * j;
 			auto hi = min + bin_size * (j + 1);
 
-			if ((lo <= numbers[i]) && (numbers[i] < hi))
+			if ((lo <= number) && (number < hi))
 			{
 				bins[j]++;
 				found = true;
@@ -48,6 +48,7 @@ make_histogram(const vector<double> numbers, size_t bin_count)
 		}
 	}
 	return bins;
+
 }
 
 
