@@ -42,22 +42,22 @@ read_input(istream& in)
 }
 
 vector<size_t> 
-make_histogram(const vector<double> numbers, size_t bin_count)
+make_histogram(struct Input input)
 {
-	vector<size_t> bins(bin_count,0);
+	vector<size_t> bins(input.bin_count, 0);
 	double min, max;
-	find_minmax(numbers, min, max);
-	double bin_size = (max - min) / bin_count;
+	find_minmax(input.numbers, min, max);
+	double bin_size = (max - min) / input.bin_count;
 
-	for (size_t i = 0; i < numbers.size(); i++)
+	for (double number : input.numbers)
 	{
 		bool found = false;
-		for (size_t j = 0; j < (bin_count - 1) && !found; j++)
+		for (size_t j = 0; j < (input.bin_count - 1) && !found; j++)
 		{
 			auto lo = min + bin_size * j;
 			auto hi = min + bin_size * (j + 1);
 
-			if ((lo <= numbers[i]) && (numbers[i] < hi))
+			if ((lo <= number) && (number < hi))
 			{
 				bins[j]++;
 				found = true;
@@ -66,7 +66,7 @@ make_histogram(const vector<double> numbers, size_t bin_count)
 		}
 		if (!found)
 		{
-			bins[bin_count - 1]++;
+			bins[input.bin_count - 1]++;
 		}
 	}
 	return bins;
@@ -81,7 +81,7 @@ int main()
 
 	//Рассчет гистограммы
 
-	const auto bins = make_histogram(input.numbers, input.bin_count);
+	const auto bins = make_histogram(input);
 
 	//Вывод данных
 	show_histogram_svg(bins);
