@@ -49,15 +49,24 @@ read_input(istream& in, bool promt)
 int
 main(int argc, char* argv[]) 
 {
+	curl_global_init(CURL_GLOBAL_ALL);
 
 	if (argc > 1)
 	{
-		for (int i = 0; i < argc; i++)
-			cerr << "argv[" << i << "] = " << argv[i] << "\n";
-		return 0;
+		CURL* curl = curl_easy_init();
+		if (curl) {
+			CURLcode res;
+			curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
+			res = curl_easy_perform(curl);
+			if (res != CURLE_OK)
+				fprintf(stderr, "curl_easy_perform() failed: %s\n",
+					curl_easy_strerror(res));
+			curl_easy_cleanup(curl);
+		}
+		exit(1);
 	}
 
-	curl_global_init(CURL_GLOBAL_ALL);
+	
 	//¬вод данных
 	
 	Input input = read_input(cin, true);
