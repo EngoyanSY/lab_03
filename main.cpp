@@ -5,6 +5,7 @@
 #include "histogram.h"
 #include "SVG.h"
 
+#include <curl/curl.h>
 using namespace std;
 
 struct Input {
@@ -47,6 +48,7 @@ read_input(istream& in, bool promt)
 
 int main()
 {
+	curl_global_init(CURL_GLOBAL_ALL);
 	//¬вод данных
 	
 	Input input = read_input(cin, true);
