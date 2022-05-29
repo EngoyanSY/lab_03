@@ -52,25 +52,9 @@ write_data(void* items, size_t item_size, size_t item_count, void* ctx)
 {
 	stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
 
-<<<<<<< HEAD
-	for (double number : numbers)
-	{
-		bool found = false;
-		for (size_t j = 0; j < (bin_count - 1) && !found; j++)
-		{
-			auto lo = min + bin_size * j;
-			auto hi = min + bin_size * (j + 1);
-
-			if ((lo <= number) && (number < hi))
-			{
-				bins[j]++;
-				found = true;
-			}
-=======
 	size_t data_size = item_count * item_size;
 
 	buffer->write(static_cast<const char*>(items), data_size);
->>>>>>> lab_04
 
 	return data_size;
 }
@@ -97,38 +81,9 @@ download(const string& address)
 		}
 		curl_easy_cleanup(curl);
 	}
-<<<<<<< HEAD
-	return bins;
-=======
-
 	return read_input(buffer, false);
->>>>>>> lab_04
-
 }
 
-
-<<<<<<< HEAD
-
-int main()
-{
-	//Ввод данных
-	size_t  number_count;
-	cerr << "Enter number count: ";
-	cin >> number_count;
-
-	if (!number_count)
-	{
-		cout << "Number count = 0";
-		return 0;
-	}
-
-	cerr << "Enter number: ";
-	const auto numbers = input_numbers(number_count);
-
-	size_t bin_count;
-	cerr << "Enter bin count: \n";
-	cin >> bin_count;
-=======
 int
 main(int argc, char* argv[]) 
 {
@@ -141,12 +96,12 @@ main(int argc, char* argv[])
 	else {
 		input = read_input(cin, true);
 	}
->>>>>>> lab_04
+
 
 
 	cerr << "Choose fills: \n";
 
-	auto fills = choose_colors(bin_count, cin);
+	auto fills = choose_colors(input.bin_count, cin);
 	
 
 	//Рассчет гистограммы
@@ -154,11 +109,6 @@ main(int argc, char* argv[])
 	const auto bins = make_histogram(input);
 
 	//Вывод данных
-<<<<<<< HEAD
 	show_histogram_svg(bins, fills);
-=======
-	show_histogram_svg(bins);
 
-	return 0;
->>>>>>> lab_04
 }
