@@ -46,8 +46,17 @@ read_input(istream& in, bool promt)
 }
 
 
-int main()
+int
+main(int argc, char* argv[]) 
 {
+
+	if (argc > 1)
+	{
+		for (int i = 0; i < argc; i++)
+			cerr << "argv[" << i << "] = " << argv[i] << "\n";
+		return 0;
+	}
+
 	curl_global_init(CURL_GLOBAL_ALL);
 	//¬вод данных
 	
