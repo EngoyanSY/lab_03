@@ -1,8 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
+#include <cstdio>
 
 using namespace std;
+
+string
+make_info_text() {
+	stringstream buffer;
+	// TODO: получить версию системы, записать в буфер.
+	// TODO: получить имя компьютера, записать в буфер.
+	return buffer.str();
+}
 
 void
 svg_begin(double width, double height)
@@ -35,17 +45,17 @@ svg_rect(double x, double y, double width, double height, string stroke = "black
 void
 show_histogram_svg(const vector<size_t>& bins, const vector<string>& fills)
 {
-	const auto IMAGE_WIDTH = 400;
-	const auto IMAGE_HEIGHT = 300;
-	const auto TEXT_LEFT = 20;
-	const auto TEXT_BASELINE = 20;
-	const auto TEXT_WIDTH = 50;
-	const auto BIN_HEIGHT = 30;
-	const auto BLOCK_WIDTH = 10;
+	const size_t IMAGE_WIDTH = 400;
+	const size_t IMAGE_HEIGHT = 300;
+	const size_t TEXT_LEFT = 20;
+	const size_t TEXT_BASELINE = 20;
+	const size_t TEXT_WIDTH = 50;
+	const size_t BIN_HEIGHT = 30;
+	const size_t BLOCK_WIDTH = 10;
 
 	svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
 
-	const auto MAX_BIN_WIDTH = IMAGE_WIDTH - TEXT_WIDTH;
+	const size_t MAX_BIN_WIDTH = IMAGE_WIDTH - TEXT_WIDTH;
 
 	size_t max_bins_width = bins[0];
 	for (size_t bin : bins)

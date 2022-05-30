@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdio>
 
 #include <sstream>
 
@@ -50,6 +51,7 @@ read_input(istream& in, bool promt)
 size_t
 write_data(void* items, size_t item_size, size_t item_count, void* ctx) 
 {
+
 	stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
 
 	size_t data_size = item_count * item_size;
@@ -74,9 +76,19 @@ download(const string& address)
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
 		res = curl_easy_perform(curl);
+
+		if (!res) //Индивидуальное задание вариант 6
+		{
+			double size;
+			res = curl_easy_getinfo(curl, CURLINFO_SIZE_DOWNLOAD, &size);
+			if (!res) {
+				fprintf(stderr, "Downloaded %.0f bytes\n\n", size);
+			}
+		}
+
 		if (res != CURLE_OK)
 		{
-			fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+			fprintf(stderr, "curl_easy_perform() failed: %s\n\n", curl_easy_strerror(res));
 			exit(1);
 		}
 		curl_easy_cleanup(curl);
@@ -98,15 +110,15 @@ main(int argc, char* argv[])
 	}
 
 
-
 	cerr << "Choose fills: \n";
 
-	auto fills = choose_colors(input.bin_count, cin);
+	const vector<string> fills = choose_colors(input.bin_count, cin);
 	
 
 	//Рассчет гистограммы
 
-	const auto bins = make_histogram(input);
+	const vector<size_t> bins = make_histogram(input);
+	
 
 	//Вывод данных
 	show_histogram_svg(bins, fills);
