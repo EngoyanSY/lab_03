@@ -2,13 +2,12 @@
 #include <string>
 #include <vector>
 #include <cstdio>
-
 #include <sstream>
-
 #include "histogram.h"
 #include "SVG.h"
 
 #include <curl/curl.h>
+
 using namespace std;
 
 struct Input {

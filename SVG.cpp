@@ -3,14 +3,37 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <windows.h>
+
+#pragma warning(disable : 4996)
 
 using namespace std;
 
 string
 make_info_text() {
 	stringstream buffer;
-	// TODO: получить версию системы, записать в буфер.
-	// TODO: получить имя компьютера, записать в буфер.
+	
+	DWORD info = 0;
+	info = GetVersion();
+
+	DWORD mask = 0x000000ff;
+	DWORD version_major = info & mask;
+
+	mask = 0x0000ff00;
+	DWORD version_minor = info & mask;
+	version_minor = version_minor >> 8;
+
+	DWORD platform = info >> 16;
+	DWORD build = platform;
+
+	char comp_name[256];
+	unsigned long size = 256;
+
+	GetComputerNameA(comp_name, &size);
+
+	buffer << "<tspan x='10' dy='1em'>Windows v" << version_major << "." << version_minor << " (build " << build << ")</tspan>"
+		   << "<tspan x='10' dy='1em'>Computer name: " << comp_name << "</tspan>";
+
 	return buffer.str();
 }
 
@@ -46,7 +69,7 @@ void
 show_histogram_svg(const vector<size_t>& bins, const vector<string>& fills)
 {
 	const size_t IMAGE_WIDTH = 400;
-	const size_t IMAGE_HEIGHT = 300;
+	const size_t IMAGE_HEIGHT = 1000;
 	const size_t TEXT_LEFT = 20;
 	const size_t TEXT_BASELINE = 20;
 	const size_t TEXT_WIDTH = 50;
@@ -81,6 +104,8 @@ show_histogram_svg(const vector<size_t>& bins, const vector<string>& fills)
 		svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "black", fills[i]);
 		top += BIN_HEIGHT;
 	}
+
+	svg_text(TEXT_LEFT, top + TEXT_BASELINE, make_info_text());
 
 	svg_end();
 }
